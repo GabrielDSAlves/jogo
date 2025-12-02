@@ -9,7 +9,7 @@ import backend
 
 # Inicialização pygame (frontend controla display/font)
 pygame.init()
-pygame.display.set_caption("Álgebra Tátil - Simulador")
+pygame.display.set_caption("Simulador de bloco de álgebra")
 
 # tela e fontes (mantive como no seu original)
 WIDTH, HEIGHT = backend.WIDTH, backend.HEIGHT
@@ -181,8 +181,8 @@ def draw_ui():
     SCREEN.fill((245, 240, 255))
     mx, my = pygame.mouse.get_pos()
 
-    title = BIGFONT.render("Simulador Tátil de Álgebra", True, (50, 40, 70))
-    SCREEN.blit(title, (backend.MARGIN, 55))
+    title = BIGFONT.render("Simulador de bloco de álgebra", True, (50, 40, 70))
+    SCREEN.blit(title, (backend.MARGIN, 65))
 
     # botões
     draw_button(SCREEN, generate_btn, "Nova Equação",
@@ -248,14 +248,12 @@ def draw_ui():
                      (eq_x, backend.AREA_Y + 20),
                      (eq_x, backend.AREA_Y + backend.AREA_H - 20), 3)
 
-    eqtxt = BIGFONT.render("=", True, (70, 60, 90))
-    SCREEN.blit(eqtxt, (eq_x - eqtxt.get_width()//2 - 4,
-                        backend.AREA_Y + backend.AREA_H//2 - 20))
+   
 
     # equação
     aL, bL, aR, bR = backend.compute_equation_from_pieces()
     eq_full = BIGFONT.render(f"{backend.format_side(aL, bL)} = {backend.format_side(aR, bR)}", True, (80, 70, 100))
-    SCREEN.blit(eq_full, (backend.MARGIN, backend.AREA_Y - 55))
+    SCREEN.blit(eq_full, (backend.MARGIN, backend.AREA_Y - 65))
 
     # peças (estado do backend)
     for p in backend.pieces:
@@ -306,7 +304,7 @@ def mainloop():
                         divisor = popup_divisor()
                         if divisor is not None and divisor >= 1:
                             backend.divisoes_visuais = int(divisor)
-                            backend.message_update(f"Tela dividida em {backend.divisoes_visuais}. Agora arraste as peças manualmente.")
+                            backend.message_update(f"Tela dividida em {backend.divisoes_visuais}. Agora arraste as peças.")
                             backend.pack_pieces()
                         else:
                             backend.message_update("Divisão cancelada ou inválida.")
